@@ -1,6 +1,6 @@
 <!-- args: commits object -->
 <rena-update-github>
-    <div class="commit" each="{ commit in pros.data }">
+    <div class="commit" each="{ commit in props.data }">
         <div class="date">{ (new Date(commit.commit.comitter.date)).toLocaleString() }</div>
         <div class="message">{ commit.commit.message }</div>        
     </div>
