@@ -5,15 +5,18 @@
     </head>
     <body>
         <h1>開発者ポータル</h1>
-        <div id="nigella"></div>
-        <script type="riot" src="components/rena-update.riot"></script>
+        <rena-update-github></rena-update-github>
+        <script src="components/rena-update-github.riot" type="riot"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/riot/4.6.6/riot+compiler.min.js"></script>
         <script>
-            riot.compile(() => {
-                fetch('https://api.github.com/repos/renagalaxy/nigella/commits')
-                    .then(r => r.json())
-                    .then(x => riot.mount('#nigella', 'rena-update-github', { data: x }));
-            });
+            (async function main() {
+                await riot.compile()
+                // const commits = await fetch('https://api.github.com/repos/renagalaxy/nigella/commits')
+                //     .then(r => r.json())
+                // riot.mount('nigella', { data: commits })
+                riot.mount('rena-update-github')
+            }())
+            
         </script>
     </body>
 </html>
