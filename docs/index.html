@@ -6,17 +6,20 @@
     <body>
         <h1>開発者ポータル</h1>
         <rena-update-github></rena-update-github>
-        <script src="components/rena-update-github.riot" type="riot"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/riot/4.6.6/riot+compiler.min.js"></script>
+        <rena-update-blog></rena-update-blog>
+        <script src="components/rena-update-github.tag" type="riot/tag"></script>
+        <script src="components/rena-update-blog.tag" type="riot/tag"></script>
+        <script src="https://cdn.jsdelivr.net/npm/riot@3/riot+compiler.min.js"></script>
         <script>
-            (async function main() {
-                await riot.compile()
-                // const commits = await fetch('https://api.github.com/repos/renagalaxy/nigella/commits')
-                //     .then(r => r.json())
-                // riot.mount('nigella', { data: commits })
-                riot.mount('rena-update-github')
-            }())
-            
+            fetch('https://api.github.com/repos/renagalaxy/nigella/commits')
+                .then(r => r.json())
+                .then(x => riot.compile('rena-update-github', 'rena-update-github', { data: x }))
+
+            fetch('https://renagalaxy.com/wp-json/wp/v2/posts')
+                .then(r => r.json())
+                .then(x => riot.compile('rena-update-blog', 'rena-update-blog', { data: x }))
+
+            riot.mount('*')
         </script>
     </body>
 </html>
