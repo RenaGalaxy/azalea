@@ -1,7 +1,7 @@
 <!-- args: commits object -->
 <rena-update-github>
     <div class="row" each="{ commit in opts.data }">
-        <a href="{ commit.commit.html_url }">
+        <a href="{ commit.html_url }">
         <div class="date">{ (new Date(commit.commit.committer.date)).toLocaleDateString() }</div>
         <div class="message">{ commit.commit.message }</div>        
 
