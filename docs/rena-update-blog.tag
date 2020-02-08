@@ -1,4 +1,4 @@
-<!-- args: commits object -->
+<!-- args: posts object -->
 <rena-update-blog>
     <div class="commit" each="{ post in opts.data }">
         <a href="{ post.link }">
