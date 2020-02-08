@@ -5,21 +5,42 @@
     </head>
     <body>
         <h1>開発者ポータル</h1>
-        <rena-update-github></rena-update-github>
-        <rena-update-blog></rena-update-blog>
+
+        <div id="rest">
+            <div>REST API コードベース</div>
+            <section id="update"></section>
+        </div>
+
+        <div id="portal">
+            <div>開発者ポータル</div>
+            <section id="update"></section>
+        </div>
+
+        <div id="blog">
+            <div>ブログ</div>
+            <section id="update"></section>
+        </div>
+
         <script type="riot/tag" src="rena-update-github.tag"></script>
         <script type="riot/tag" src="rena-update-blog.tag"></script>
         <script src="https://cdn.jsdelivr.net/npm/riot@3/riot+compiler.min.js"></script>
         <script>
-            fetch('https://api.github.com/repos/renagalaxy/nigella/commits')
-                .then(r => r.json())
-                .then(x => riot.compile('rena-update-github', 'rena-update-github', { data: x }))
+            riot.compile(() => {
 
-            fetch('https://renagalaxy.com/wp-json/wp/v2/posts')
-                .then(r => r.json())
-                .then(x => riot.compile('rena-update-blog', 'rena-update-blog', { data: x }))
-
-            riot.mount('*')
+                fetch('https://api.github.com/repos/renagalaxy/nigella/commits')
+                    .then(r => r.json())
+                    .then(x => riot.mount('#rest #update', 'rena-update-github', { data: x }))
+                    
+                fetch('https://api.github.com/repos/renagalaxy/azalea/commits')
+                    .then(r => r.json())
+                    .then(x => riot.mount('#portal #update', 'rena-update-github', { data: x }))
+                                    
+                fetch('https://renagalaxy.com/wp-json/wp/v2/posts')
+                    .then(r => r.json())
+                    .then(x => riot.mount('#blog #update', 'rena-update-blog', { data: x }))
+                
+                riot.mount('*')
+            })
         </script>
     </body>
 </html>
